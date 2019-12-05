@@ -20,6 +20,7 @@ export default class Home extends Component {
       <View style={styles.container}>
         <FlatList
           data={BOOKS}
+          numColumns={2}
           keyExtractor={this.keyExtractor}
           renderItem={this.renderItem} />
       </View>
@@ -31,8 +32,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   item: {
     flex: 1,
