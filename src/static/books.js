@@ -1,7 +1,7 @@
 export const READING = 'reading'
 export const WANT_TO_READ = 'wantToRead'
 export const COMPLETED = 'completed'
-export default Books = [
+export const BOOKS = [
     {
         id: 1,
         title: 'Harry Potter and the Goblet of Fire',
@@ -18,7 +18,7 @@ export default Books = [
     },
     {
         id: 3,
-        title: 'of 1984',
+        title: '1984',
         author: 'George Orwell',
         thumbnail: 'https://covers.openlibrary.org/w/id/7222246-M.jpg',
         category: WANT_TO_READ
