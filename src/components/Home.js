@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import { BOOKS } from '../static/books'
-import { stringify } from 'qs';
+import Book from './Book'
 
 export default class Home extends Component {
 
   renderItem = ({ item }) => {
     return (
       <View style={styles.item}>
-        <Text>{item.title}</Text>
+        <Book book={item} />
       </View>
     );
   }
 
   keyExtractor = book => book.id.toString()
-  
 
   render() {
     return (
