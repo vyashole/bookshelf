@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
-import { connect } from 'react-redux'
+import { View, Text, StyleSheet, Image } from 'react-native'
 
 const icon = require('../../assets/icon.png')
 const coverPlaceHolder = 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/223/green-book_1f4d7.png'
@@ -10,11 +9,9 @@ export class Book extends Component {
         super(props)
     }
 
-    onPressed = () => { }
-
     render() {
         return (
-            <TouchableOpacity onPressed={this.onPressed} style={styles.container}>
+            <View style={styles.container}>
                 <Image
                     source={{
                         uri: this.props.book.cover || coverPlaceHolder
@@ -24,18 +21,11 @@ export class Book extends Component {
                 />
                 <Text style={styles.title}> {this.props.book.title} </Text>
                 <Text style={styles.author}> {this.props.book.author} </Text>
-            </TouchableOpacity>
+            </View>
         )
     }
 }
 
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
 
 const styles = StyleSheet.create({
     container: {
@@ -57,4 +47,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Book)
+export default Book

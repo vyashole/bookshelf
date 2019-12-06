@@ -5,13 +5,14 @@ import { connect } from 'react-redux'
 import { fetchBooks } from '../actions'
 
 import Book from './Book'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 class Home extends Component {
 
   renderItem = ({ item }) => {
     return (
-      <View style={styles.item}>
+      <TouchableOpacity onPress={() => this.bookPressHandler(item)} style={styles.item}>
         <Book book={item} />
-      </View>
+      </TouchableOpacity>
     );
   }
 
@@ -21,8 +22,11 @@ class Home extends Component {
     this.props.fetchBooks()
   }
 
+  bookPressHandler = (item) => {
+    this.props.navigation.navigate('Book', { book: item })
+  }
+
   render() {
-    console.log('this.props.books', this.props.books)
     return (
       <View style={styles.container}>
         <FlatList

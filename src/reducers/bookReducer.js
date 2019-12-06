@@ -31,14 +31,9 @@ const bookReducer = (state = INITIAL_STATE, action) => {
         data.push({ index: property, ...payload[property] });
       }
 
-      console.log('data', data)
-
       return {
         ...state,
         books: data,
-        reading: data.filter(data => data.category === READING),
-        wantToRead: data.filter(data => data.category === WANT_TO_READ),
-        completed: data.filter(data => data.category === COMPLETED),
         isFetching: false
       }
 
@@ -56,8 +51,14 @@ const bookReducer = (state = INITIAL_STATE, action) => {
       }
 
     case UPDATE_BOOKS_SUCCESS:
+      const { books } = state
+      updatedBooks = books.map(book => {
+        if (book.id === payload.id) return { ...book, ...payload }
+        return book
+      })
       return {
         ...state,
+        books: updatedBooks,
         isUpdating: false,
         success: true
       }
