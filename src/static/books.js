@@ -1,7 +1,7 @@
 export const READING = 'READING'
 export const WANT_TO_READ = 'WANT_TO_READ'
 export const COMPLETED = 'COMPLETED'
-export const BOOKS = [
+export const SAMPLE_BOOKS = [
     {
         id: 1,
         title: 'Harry Potter and the Goblet of Fire',
