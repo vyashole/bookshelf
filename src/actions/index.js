@@ -11,14 +11,14 @@ import {
 } from './actionTypes';
 import { BOOKS } from '../static/books'
 
-export function fetchBooks() {
+export function fetchBooks(books) {
   return dispatch => {
     dispatch({
       type: FETCH_BOOKS_REQUESTED,
       payload: {}
     })
     // TODO Fetch books from db
-    if (BOOKS) {
+    if (!books) {
       dispatch({
         type: FETCH_BOOKS_SUCCESS,
         payload: BOOKS
@@ -26,8 +26,8 @@ export function fetchBooks() {
     }
     else {
       dispatch({
-        type: FETCH_BOOKS_FAILURE,
-        payload: {}
+        type: FETCH_BOOKS_SUCCESS,
+        payload: books
       })
     }
 

@@ -19,7 +19,7 @@ class Home extends Component {
   keyExtractor = book => book.id.toString()
 
   componentDidMount() {
-    this.props.fetchBooks()
+    this.props.fetchBooks(this.props.books)
   }
 
   bookPressHandler = (item) => {
@@ -61,7 +61,7 @@ const mapStateToProps = (state) => {
 
 
 const mapDispatchToProps = dispatch => ({
-  fetchBooks: () => fetchBooks()(dispatch)
+  fetchBooks: (books) => fetchBooks(books)(dispatch)
 });
 
 
