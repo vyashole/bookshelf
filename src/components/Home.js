@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
-import { BOOKS } from '../static/books'
-import Book from './Book'
+import { connect } from 'react-redux'
 
-export default class Home extends Component {
+import { fetchBooks } from '../actions'
+
+import Book from './Book'
+class Home extends Component {
 
   renderItem = ({ item }) => {
     return (
@@ -15,11 +17,16 @@ export default class Home extends Component {
 
   keyExtractor = book => book.id.toString()
 
+  componentDidMount() {
+    this.props.fetchBooks()
+  }
+
   render() {
+    console.log('this.props.books', this.props.books)
     return (
       <View style={styles.container}>
         <FlatList
-          data={BOOKS}
+          data={this.props.books}
           numColumns={2}
           keyExtractor={this.keyExtractor}
           renderItem={this.renderItem} />
@@ -35,7 +42,23 @@ const styles = StyleSheet.create({
   },
   item: {
     flex: 1,
-    margin: 5
+    margin: 10
   }
 
+})
+
+
+const mapStateToProps = (state) => {
+  return {
+    books: state.books.books,
+    isFetching: state.books.isFetching
+  }
+}
+
+
+const mapDispatchToProps = dispatch => ({
+  fetchBooks: () => fetchBooks()(dispatch)
 });
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
