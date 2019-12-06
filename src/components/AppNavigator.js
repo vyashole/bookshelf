@@ -1,13 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native'
 import Home from './Home'
+import { createStackNavigator } from 'react-navigation-stack'
 
-export default function AppNavigator() {
-  return (
-    <Home/>
-  );
+export default AppNavigator = createStackNavigator({
+  Home: {
+    screen: Home,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Bookshelf',
+    })
+  },
+
+}, {
+  initialRouteName: 'Home'
 }
+)
 
-const styles = StyleSheet.create({
-  
-});
