@@ -1,43 +1,44 @@
-import { SAMPLE_BOOKS, WANT_TO_READ, READING, COMPLETED } from '../static/books'
+import {
+  SAMPLE_BOOKS, WANT_TO_READ, READING, COMPLETED,
+} from '../static/books';
 import {
   FETCH_BOOKS,
   UPDATE_BOOKS,
-  ADD_BOOKS
+  ADD_BOOKS,
 } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
-  books: SAMPLE_BOOKS
-}
+  books: SAMPLE_BOOKS,
+};
 
 const bookReducer = (state = INITIAL_STATE, action) => {
-  const payload = action.payload;
+  const { payload } = action;
   switch (action.type) {
-
     case FETCH_BOOKS:
 
       return {
         ...state,
         books: payload,
-        isFetching: false
-      }
+        isFetching: false,
+      };
 
     case UPDATE_BOOKS:
-      const { books } = state
-      updatedBooks = books.map(book => {
-        if (book.id === payload.id) return { ...book, ...payload }
-        return book
-      })
+      const { books } = state;
+      updatedBooks = books.map((book) => {
+        if (book.id === payload.id) return { ...book, ...payload };
+        return book;
+      });
       return {
         ...state,
         books: updatedBooks,
         isUpdating: false,
-        success: true
-      }
+        success: true,
+      };
     case ADD_BOOKS:
       return {
         ...state,
-        isAdding: false
-      }
+        isAdding: false,
+      };
 
     default:
       return state;

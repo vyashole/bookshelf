@@ -1,6 +1,6 @@
-import { createStackNavigator } from 'react-navigation-stack'
+import { createStackNavigator } from 'react-navigation-stack';
 
-import Home from './Home'
+import Home from './Home';
 import BookDetail from './BookDetail';
 
 export default AppNavigator = createStackNavigator({
@@ -8,17 +8,15 @@ export default AppNavigator = createStackNavigator({
     screen: Home,
     navigationOptions: ({ navigation }) => ({
       title: 'Bookshelf',
-    })
+    }),
   },
   Book: {
     screen: BookDetail,
     navigationOptions: ({ navigation }) => ({
       title: navigation.getParam('book', { title: null }).title || 'Book Detail',
-    })
+    }),
   },
 
 }, {
-  initialRouteName: 'Home'
-}
-)
-
+  initialRouteName: 'Home',
+});
