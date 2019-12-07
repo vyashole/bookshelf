@@ -17,7 +17,7 @@ const mockBooks = {
     ]
 }
 describe('bookReducer', () => {
-    it('should return the initial state', () => {
+    it('should return initial state', () => {
         expect(bookReducer(undefined, {})).toEqual(INITIAL_STATE);
     });
 
@@ -31,7 +31,7 @@ describe('bookReducer', () => {
         });
     });
 
-    it('should handle UPDATE_BOOK_CATEGORY WANT_TO_READ', () => {
+    it('should handle UPDATE_BOOK_CATEGORY WANT_TO_READ, makes progress 0', () => {
         expect(bookReducer(mockBooks, {
             type: UPDATE_BOOK_CATEGORY,
             payload: { ...mockBook, category: WANT_TO_READ },
@@ -46,7 +46,7 @@ describe('bookReducer', () => {
         });
     });
 
-    it('should handle UPDATE_BOOK_CATEGORY READING', () => {
+    it('should handle UPDATE_BOOK_CATEGORY READING, no change to progress', () => {
         expect(bookReducer(mockBooks, {
             type: UPDATE_BOOK_CATEGORY,
             payload: { ...mockBook, category: READING },
@@ -60,7 +60,7 @@ describe('bookReducer', () => {
         });
     });
 
-    it('should handle UPDATE_BOOK_CATEGORY COMPLETED', () => {
+    it('should handle UPDATE_BOOK_CATEGORY COMPLETED, makes progress 100%', () => {
         expect(bookReducer(mockBooks, {
             type: UPDATE_BOOK_CATEGORY,
             payload: { ...mockBook, category: COMPLETED },
@@ -76,7 +76,7 @@ describe('bookReducer', () => {
     });
 
 
-    it('should handle UPDATE_BOOK_PROGRESS 0', () => {
+    it('should handle UPDATE_BOOK_PROGRESS 0, moves book to WANT_TO_READ', () => {
         expect(bookReducer(mockBooks, {
             type: UPDATE_BOOK_PROGRESS,
             payload: { ...mockBook, progress: 0 },
@@ -90,7 +90,7 @@ describe('bookReducer', () => {
             ],
         });
     });
-    it('should handle UPDATE_BOOK_PROGRESS positive', () => {
+    it('should handle UPDATE_BOOK_PROGRESS positive, no change to category', () => {
         expect(bookReducer(mockBooks, {
             type: UPDATE_BOOK_PROGRESS,
             payload: { ...mockBook, progress: 6 },
@@ -104,7 +104,7 @@ describe('bookReducer', () => {
             ],
         });
     });
-    it('should handle UPDATE_BOOK_PROGRESS negative', () => {
+    it('should handle UPDATE_BOOK_PROGRESS negative, makes progress 0, makes state WANT_TO_READ', () => {
         expect(bookReducer(mockBooks, {
             type: UPDATE_BOOK_PROGRESS,
             payload: { ...mockBook, progress: -6 },
@@ -119,7 +119,7 @@ describe('bookReducer', () => {
         });
     });
 
-    it('should handle UPDATE_BOOK_PROGRESS overflow', () => {
+    it('should handle UPDATE_BOOK_PROGRESS overflow, makes PROGRESS 100%, makes state COMPLETED', () => {
         expect(bookReducer(mockBooks, {
             type: UPDATE_BOOK_PROGRESS,
             payload: { ...mockBook, progress: 16 },
