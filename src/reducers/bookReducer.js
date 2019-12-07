@@ -5,6 +5,8 @@ import {
   FETCH_BOOKS,
   UPDATE_BOOKS,
   ADD_BOOKS,
+  UPDATE_BOOK_CATEGORY,
+  UPDATE_BOOK_PROGRESS,
 } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
@@ -13,17 +15,15 @@ const INITIAL_STATE = {
 
 const bookReducer = (state = INITIAL_STATE, action) => {
   const { payload } = action;
+  const { books } = state;
   switch (action.type) {
     case FETCH_BOOKS:
-
       return {
         ...state,
         books: payload,
-        isFetching: false,
       };
 
     case UPDATE_BOOKS:
-      const { books } = state;
       updatedBooks = books.map((book) => {
         if (book.id === payload.id) return { ...book, ...payload };
         return book;
@@ -31,13 +31,44 @@ const bookReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         books: updatedBooks,
-        isUpdating: false,
-        success: true,
       };
+
+    case UPDATE_BOOK_CATEGORY:
+      if (category === WANT_TO_READ) payload.progress = 0;
+      else if (category === COMPLETED) payload.progress = pages;
+      updatedBooks = books.map((book) => {
+        if (book.id === payload.id) return { ...book, ...payload };
+        return book;
+      });
+      return {
+        ...state,
+        books: updatedBooks,
+      };
+
+    case UPDATE_BOOK_PROGRESS:
+      if (payload.progress >= payload.pages) {
+        payload.progress = payload.pages;
+        payload.category = COMPLETED;
+      }
+      else if (payload.progress <= 0) {
+        payload.progress = 0;
+        payload.category = WANT_TO_READ;
+      }
+      else {
+        payload.category = READING;
+      }
+      updatedBooks = books.map((book) => {
+        if (book.id === payload.id) return { ...book, ...payload };
+        return book;
+      });
+      return {
+        ...state,
+        books: updatedBooks,
+      };
+
     case ADD_BOOKS:
       return {
         ...state,
-        isAdding: false,
       };
 
     default:

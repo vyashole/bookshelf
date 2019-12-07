@@ -3,39 +3,10 @@ import {
   View, Text, Image, TouchableOpacity, StyleSheet,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { updateBook } from '../actions';
+import { updateBookProgress, updateBookCategory } from '../actions';
 import { WANT_TO_READ, READING, COMPLETED } from '../static/books';
 
 class BookDetail extends Component {
-  increaseProgress = (book) => {
-    this.props.updateBook({
-      ...book,
-      progress: book.progress + 1 >= book.pages ? book.pages : book.progress + 1,
-      category: book.progress + 1 >= book.pages ? COMPLETED : READING,
-    });
-  }
-
-  decreaseProgress = (book) => {
-    this.props.updateBook({
-      ...book,
-      progress: book.progress - 1 <= 0 ? 0 : book.progress - 1,
-      category: book.progress - 1 <= 0 ? WANT_TO_READ : READING,
-    });
-  }
-
-  updateCategory = (book, category) => {
-    switch (category) {
-      case WANT_TO_READ:
-        this.props.updateBook({ ...book, progress: 0, category });
-        break;
-      case READING:
-        this.props.updateBook({ ...book, category });
-        break;
-      case COMPLETED:
-        this.props.updateBook({ ...book, progress: book.pages, category });
-        break;
-    }
-  }
 
   render() {
     const { params } = this.props.navigation.state;
@@ -51,13 +22,13 @@ class BookDetail extends Component {
         <Text style={styles.subtitle}>{book.author}</Text>
         <Text style={styles.subtitle}>{book.category}</Text>
         <View style={{ flexDirection: 'row' }}>
-          <TouchableOpacity onPress={() => this.decreaseProgress(book)}>
+          <TouchableOpacity onPress={() => this.props.updateBookProgress({ ...book, progress: book.progress - 1 })}>
             <Text style={styles.progress}>Decrease</Text>
           </TouchableOpacity>
           <Text style={styles.progress}>
             {`${book.progress}/${book.pages} (${Math.round(book.progress * 100 / book.pages)}%)`}
           </Text>
-          <TouchableOpacity onPress={() => this.increaseProgress(book)}>
+          <TouchableOpacity onPress={() => this.props.updateBookProgress({ ...book, progress: book.progress + 1 })}>
             <Text style={styles.progress}>Increase</Text>
           </TouchableOpacity>
 
@@ -97,7 +68,8 @@ const mapStateToProps = (state) => ({
 
 
 const mapDispatchToProps = (dispatch) => ({
-  updateBook: (book) => updateBook(book)(dispatch),
+  updateBookProgress: (book) => updateBookProgress(book)(dispatch),
+  updateBookCategory: (book) => updateBookCategory(book)(dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookDetail);
