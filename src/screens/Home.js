@@ -3,11 +3,11 @@ import {
   StyleSheet, Text, View, FlatList,
 } from 'react-native';
 import { connect } from 'react-redux';
-
+import SafeAreaView, { SafeAreaConsumer } from 'react-native-safe-area-view'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { fetchBooks } from '../actions';
 
-import Book from './Book';
+import BookItem from '../components/BookItem';
 
 class Home extends Component {
   componentDidMount() {
@@ -18,7 +18,7 @@ class Home extends Component {
 
   renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => this.bookPressHandler(item)} style={styles.item}>
-      <Book book={item} />
+      <BookItem book={item} />
     </TouchableOpacity>
   )
 
@@ -28,14 +28,14 @@ class Home extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <SafeAreaView forceInset={{ top: 'always' }} style={styles.container}>
         <FlatList
           data={this.props.books}
           numColumns={2}
           keyExtractor={this.keyExtractor}
           renderItem={this.renderItem}
         />
-      </View>
+      </SafeAreaView>
     );
   }
 }

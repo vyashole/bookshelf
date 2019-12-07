@@ -1,7 +1,7 @@
 import { createStackNavigator } from 'react-navigation-stack';
 
-import Home from './Home';
-import BookDetail from './BookDetail';
+import Home from '../screens/Home';
+import BookDetail from '../screens/BookDetail';
 
 export default AppNavigator = createStackNavigator({
   Home: {
@@ -19,4 +19,5 @@ export default AppNavigator = createStackNavigator({
 
 }, {
   initialRouteName: 'Home',
+  headerMode: 'none'
 });

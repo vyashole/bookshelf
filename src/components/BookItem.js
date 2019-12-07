@@ -5,7 +5,7 @@ import {
 
 const coverPlaceHolder = 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/223/green-book_1f4d7.png';
 
-const Book = ({ book }) => (
+const BookItem = ({ book }) => (
   <View style={styles.container}>
     <Image
       source={{
@@ -13,16 +13,8 @@ const Book = ({ book }) => (
       }}
       style={styles.cover}
     />
-    <Text style={styles.title}>
-      {' '}
-      {book.title}
-      {' '}
-    </Text>
-    <Text style={styles.author}>
-      {' '}
-      {book.author}
-      {' '}
-    </Text>
+    <Text style={styles.title}>{book.title}</Text>
+    <Text style={styles.author}>{book.author}</Text>
   </View>
 );
 
@@ -47,4 +39,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default Book;
+export default BookItem;

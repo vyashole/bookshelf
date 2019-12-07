@@ -5,6 +5,7 @@ import {
 import { connect } from 'react-redux';
 import { updateBookProgress, updateBookCategory } from '../actions';
 import { WANT_TO_READ, READING, COMPLETED } from '../static/books';
+import SafeAreaView from 'react-native-safe-area-view';
 
 class BookDetail extends Component {
 
@@ -13,7 +14,7 @@ class BookDetail extends Component {
     const { id } = params.book;
     book = this.props.books.find((book) => book.id === id);
     return (
-      <View style={styles.container}>
+      <SafeAreaView forceInset={{ top: 'always' }} style={styles.container}>
         <Image
           source={{ uri: book.cover || coverPlaceHolder }}
           style={styles.cover}
@@ -33,7 +34,7 @@ class BookDetail extends Component {
           </TouchableOpacity>
 
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }
