@@ -9,7 +9,7 @@ import {
   UPDATE_BOOK_PROGRESS,
 } from '../actions/actionTypes';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   books: SAMPLE_BOOKS,
 };
 
@@ -34,8 +34,8 @@ const bookReducer = (state = INITIAL_STATE, action) => {
       };
 
     case UPDATE_BOOK_CATEGORY:
-      if (category === WANT_TO_READ) payload.progress = 0;
-      else if (category === COMPLETED) payload.progress = pages;
+      if (payload.category === WANT_TO_READ) payload.progress = 0;
+      else if (payload.category === COMPLETED) payload.progress = payload.pages;
       updatedBooks = books.map((book) => {
         if (book.id === payload.id) return { ...book, ...payload };
         return book;
