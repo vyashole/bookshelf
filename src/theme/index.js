@@ -91,5 +91,5 @@ export const GlobalStyles = StyleSheet.create({
 
 export const Color = {
     primary: '#FF9633',
-    background: '#FFFFFF',
+    background: '#F7F9FC',
 }

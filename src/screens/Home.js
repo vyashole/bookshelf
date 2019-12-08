@@ -8,6 +8,7 @@ import { fetchBooks } from '../actions';
 
 import { Color } from '../theme';
 import BookShelf from '../components/BookShelf';
+import { HomeHeader } from '../components/HomeHeader';
 
 class Home extends Component {
   componentDidMount() {
@@ -21,6 +22,7 @@ class Home extends Component {
   render() {
     return (
       <SafeAreaView forceInset={{ top: 'always' }} style={styles.container}>
+        <HomeHeader />
         <BookShelf
           books={this.props.books}
           bookPressHandler={this.bookPressHandler}
@@ -34,7 +36,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    backgroundColor: Color.background,
   },
 });
 
