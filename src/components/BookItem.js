@@ -24,6 +24,7 @@ const BookItem = ({ book }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 8
   },
   label: {
     width: 260 / 1.5

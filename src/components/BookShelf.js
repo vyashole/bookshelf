@@ -20,6 +20,7 @@ export default class BookShelf extends Component {
                 numColumns={2}
                 keyExtractor={this.keyExtractor}
                 renderItem={this.renderItem}
+                contentContainerStyle={styles.container}
             />
         )
     }
@@ -28,7 +29,11 @@ export default class BookShelf extends Component {
 const styles = StyleSheet.create({
     item: {
         flex: 1,
-        margin: 8,
+        paddingHorizontal: 8
     },
+    container: {
+        alignSelf: "stretch",
+        justifyContent: "space-around"
+    }
 })
 
