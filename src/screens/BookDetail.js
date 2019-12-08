@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import {
-  View, Text, Image, TouchableOpacity, StyleSheet,
-} from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
+import { Text } from '@ui-kitten/components'
 import { updateBookProgress, updateBookCategory } from '../actions';
-import { WANT_TO_READ, READING, COMPLETED } from '../static/books';
 import SafeAreaView from 'react-native-safe-area-view';
 import { BookDetailHeader } from '../components/BookDetailHeader';
 import { CategoryPicker } from '../components/CategoryPicker';
 import BookItem from '../components/BookItem';
 import { ScrollView } from 'react-native-gesture-handler';
+import Stepper from '../components/Stepper';
 
 class BookDetail extends Component {
 
@@ -27,11 +26,21 @@ class BookDetail extends Component {
         <ScrollView>
           <View style={styles.bookContainer}>
             <BookItem book={book} />
+            <Text style={{ marginTop: 10 }} category='label'>READ STATUS</Text>
           </View>
           <CategoryPicker
             category={book.category}
             onSelectCategory={this.onSelectCategory}
           />
+          <View style={styles.bookContainer}>
+            <Text style={{ marginTop: 10, marginBottom: 5 }} category='label'>READ PROGRESS</Text>
+            <Stepper
+              currentValue={book.progress}
+              maxValue={book.pages}
+              onIncrease={() => this.props.updateBookProgress({ ...book, progress: book.progress + 1 })}
+              onDecrease={() => this.props.updateBookProgress({ ...book, progress: book.progress - 1 })}
+            />
+          </View>
         </ScrollView>
       </SafeAreaView>
     );
