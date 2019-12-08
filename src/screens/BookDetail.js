@@ -7,8 +7,13 @@ import { updateBookProgress, updateBookCategory } from '../actions';
 import { WANT_TO_READ, READING, COMPLETED } from '../static/books';
 import SafeAreaView from 'react-native-safe-area-view';
 import { BookDetailHeader } from '../components/BookDetailHeader';
+import { CategoryPicker } from '../components/CategoryPicker';
 
 class BookDetail extends Component {
+
+  onSelectCategory = (category) => {
+    this.props.updateBookCategory({ ...book, category })
+  }
 
   render() {
     const { params } = this.props.navigation.state;
@@ -23,7 +28,12 @@ class BookDetail extends Component {
         />
         <Text style={styles.title}>{book.title}</Text>
         <Text style={styles.subtitle}>{book.author}</Text>
-        <Text style={styles.subtitle}>{book.category}</Text>
+        <View>
+          <CategoryPicker
+            category={book.category}
+            onSelectCategory={this.onSelectCategory}
+          />
+        </View>
         <View style={{ flexDirection: 'row' }}>
           <TouchableOpacity onPress={() => this.props.updateBookProgress({ ...book, progress: book.progress - 1 })}>
             <Text style={styles.progress}>Decrease</Text>
@@ -44,7 +54,6 @@ class BookDetail extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    height: 400,
     padding: 5,
   },
   cover: {
