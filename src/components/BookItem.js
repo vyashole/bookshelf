@@ -1,41 +1,35 @@
 import React, { Component } from 'react';
-import {
-  View, Text, StyleSheet, Image,
-} from 'react-native';
-
+import { StyleSheet, ActivityIndicator } from 'react-native';
+import { Layout, Text } from '@ui-kitten/components'
+import { Image } from 'react-native-elements'
+import { GlobalStyles, Color } from '../theme';
 const coverPlaceHolder = 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/223/green-book_1f4d7.png';
 
 const BookItem = ({ book }) => (
-  <View style={styles.container}>
-    <Image
-      source={{
-        uri: book.cover || coverPlaceHolder,
-      }}
-      style={styles.cover}
-    />
-    <Text style={styles.title}>{book.title}</Text>
-    <Text style={styles.author}>{book.author}</Text>
-  </View>
+  <Layout style={styles.container}>
+    <Layout>
+      <Image
+        source={{
+          uri: book.cover || coverPlaceHolder,
+        }}
+        containerStyle={GlobalStyles.bookCover}
+        placeholderStyle={GlobalStyles.bookCover}
+        PlaceholderContent={<ActivityIndicator color={Color.primary} />}
+      />
+    </Layout>
+    <Text style={styles.label} category='s1'>{book.title}</Text>
+    <Text style={styles.label} category='p2'>{book.author}</Text>
+  </Layout>
 );
 
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 1,
-    padding: 5,
-  },
-  cover: {
     flex: 1,
-    padding: 5,
-    height: 260,
-    width: 180,
   },
-  title: {
-    fontSize: 14,
-  },
-  author: {
-    fontSize: 12,
-  },
+  label: {
+    width: 260 / 1.5
+  }
 });
 
 

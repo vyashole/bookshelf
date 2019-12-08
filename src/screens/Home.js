@@ -4,23 +4,15 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import SafeAreaView, { SafeAreaConsumer } from 'react-native-safe-area-view'
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { fetchBooks } from '../actions';
 
-import BookItem from '../components/BookItem';
+import { Color } from '../theme';
+import BookShelf from '../components/BookShelf';
 
 class Home extends Component {
   componentDidMount() {
     this.props.fetchBooks(this.props.books);
   }
-
-  keyExtractor = (book) => book.id.toString()
-
-  renderItem = ({ item }) => (
-    <TouchableOpacity onPress={() => this.bookPressHandler(item)} style={styles.item}>
-      <BookItem book={item} />
-    </TouchableOpacity>
-  )
 
   bookPressHandler = (item) => {
     this.props.navigation.navigate('Book', { book: item });
@@ -29,11 +21,9 @@ class Home extends Component {
   render() {
     return (
       <SafeAreaView forceInset={{ top: 'always' }} style={styles.container}>
-        <FlatList
-          data={this.props.books}
-          numColumns={2}
-          keyExtractor={this.keyExtractor}
-          renderItem={this.renderItem}
+        <BookShelf
+          books={this.props.books}
+          bookPressHandler={this.bookPressHandler}
         />
       </SafeAreaView>
     );
@@ -43,13 +33,9 @@ class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    alignItems: "center",
+    justifyContent: "center"
   },
-  item: {
-    flex: 1,
-    margin: 10,
-  },
-
 });
 
 
