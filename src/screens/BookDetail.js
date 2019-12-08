@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { updateBookProgress, updateBookCategory } from '../actions';
 import { WANT_TO_READ, READING, COMPLETED } from '../static/books';
 import SafeAreaView from 'react-native-safe-area-view';
+import { BookDetailHeader } from '../components/BookDetailHeader';
 
 class BookDetail extends Component {
 
@@ -15,6 +16,7 @@ class BookDetail extends Component {
     book = this.props.books.find((book) => book.id === id);
     return (
       <SafeAreaView forceInset={{ top: 'always' }} style={styles.container}>
+        <BookDetailHeader onBackPress={() => this.props.navigation.goBack()} />
         <Image
           source={{ uri: book.cover || coverPlaceHolder }}
           style={styles.cover}
@@ -43,7 +45,6 @@ class BookDetail extends Component {
 const styles = StyleSheet.create({
   container: {
     height: 400,
-    borderWidth: 1,
     padding: 5,
   },
   cover: {

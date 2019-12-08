@@ -16,6 +16,16 @@ const SearchAction = (props) => (
     <TopNavigationAction {...props} icon={SearchIcon} />
 );
 
+const BookIcon = (style) => (
+    <Icon {...style} name='book-open-outline' />
+);
+
+const BookAction = (props) => (
+    <TopNavigationAction {...props}
+        disabled={true}
+        icon={BookIcon} />
+);
+
 export const HomeHeader = () => {
     const renderRightControls = () => [
         <SearchAction />,
@@ -24,6 +34,7 @@ export const HomeHeader = () => {
     return (
         <TopNavigation
             title='Bookshelf'
+            leftControl={<BookAction />}
             rightControls={renderRightControls()}
         />
     );
