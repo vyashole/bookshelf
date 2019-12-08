@@ -1,4 +1,5 @@
 import { light } from '@eva-design/eva';
+import { StyleSheet } from 'react-native'
 
 export const bookshelfTheme = {
     ...light,
@@ -78,3 +79,17 @@ export const bookshelfTheme = {
     "color-danger-transparent-500": "rgba(255, 130, 130, 0.4)",
     "color-danger-transparent-600": "rgba(255, 130, 130, 0.48)"
 };
+
+export const GlobalStyles = StyleSheet.create({
+    bookCover: {
+        height: 260,
+        width: 260 / 1.5,
+        borderRadius: 16,
+        overflow: "hidden"
+    },
+})
+
+export const Color = {
+    primary: '#FF9633',
+    background: '#FFFFFF',
+}
