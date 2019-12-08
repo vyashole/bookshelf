@@ -8,6 +8,8 @@ import { WANT_TO_READ, READING, COMPLETED } from '../static/books';
 import SafeAreaView from 'react-native-safe-area-view';
 import { BookDetailHeader } from '../components/BookDetailHeader';
 import { CategoryPicker } from '../components/CategoryPicker';
+import BookItem from '../components/BookItem';
+import { ScrollView } from 'react-native-gesture-handler';
 
 class BookDetail extends Component {
 
@@ -22,30 +24,15 @@ class BookDetail extends Component {
     return (
       <SafeAreaView forceInset={{ top: 'always' }} style={styles.container}>
         <BookDetailHeader onBackPress={() => this.props.navigation.goBack()} />
-        <Image
-          source={{ uri: book.cover || coverPlaceHolder }}
-          style={styles.cover}
-        />
-        <Text style={styles.title}>{book.title}</Text>
-        <Text style={styles.subtitle}>{book.author}</Text>
-        <View>
+        <ScrollView>
+          <View style={styles.bookContainer}>
+            <BookItem book={book} />
+          </View>
           <CategoryPicker
             category={book.category}
             onSelectCategory={this.onSelectCategory}
           />
-        </View>
-        <View style={{ flexDirection: 'row' }}>
-          <TouchableOpacity onPress={() => this.props.updateBookProgress({ ...book, progress: book.progress - 1 })}>
-            <Text style={styles.progress}>Decrease</Text>
-          </TouchableOpacity>
-          <Text style={styles.progress}>
-            {`${book.progress}/${book.pages} (${Math.round(book.progress * 100 / book.pages)}%)`}
-          </Text>
-          <TouchableOpacity onPress={() => this.props.updateBookProgress({ ...book, progress: book.progress + 1 })}>
-            <Text style={styles.progress}>Increase</Text>
-          </TouchableOpacity>
-
-        </View>
+        </ScrollView>
       </SafeAreaView>
     );
   }
@@ -54,6 +41,8 @@ class BookDetail extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    alignItems: "stretch",
     padding: 5,
   },
   cover: {
@@ -61,16 +50,14 @@ const styles = StyleSheet.create({
     height: 260,
     width: 180,
   },
-  title: {
-    fontSize: 14,
-  },
-  subtitle: {
-    fontSize: 12,
-  },
   progress: {
     margin: 5,
     fontSize: 24,
   },
+  bookContainer: {
+    alignItems: "center",
+    paddingHorizontal: 8
+  }
 });
 
 const mapStateToProps = (state) => ({

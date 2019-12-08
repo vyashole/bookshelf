@@ -81,9 +81,15 @@ export const bookshelfTheme = {
 };
 
 export const GlobalStyles = StyleSheet.create({
-    bookCover: {
+    bookCoverSmall: {
         height: 260,
-        width: 260 / 1.5,
+        width: 173,
+        borderRadius: 16,
+        overflow: "hidden"
+    },
+    bookCoverLarge: {
+        height: 390,
+        width: 260,
         borderRadius: 16,
         overflow: "hidden"
     },

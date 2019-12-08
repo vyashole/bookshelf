@@ -7,7 +7,7 @@ import BookItem from './BookItem';
 export default class BookShelf extends Component {
     renderItem = ({ item }) => (
         <TouchableOpacity onPress={() => this.props.bookPressHandler(item)} style={styles.item}>
-            <BookItem book={item} />
+            <BookItem book={item} appearance='small' />
         </TouchableOpacity>
     )
 
@@ -31,7 +31,8 @@ export default class BookShelf extends Component {
 const styles = StyleSheet.create({
     item: {
         flex: 1,
-        paddingHorizontal: 8
+        paddingHorizontal: 8,
+        maxWidth: 200
     },
     container: {
         alignSelf: "stretch",

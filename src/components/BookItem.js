@@ -7,18 +7,18 @@ import ProgressBar from 'react-native-progress/Bar';
 import { GlobalStyles, Color } from '../theme';
 const coverPlaceHolder = 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/223/green-book_1f4d7.png';
 
-const BookItem = ({ book }) => (
+const BookItem = ({ book, appearance = 'large' }) => (
   <View style={styles.container}>
     <Image
       source={{
         uri: book.cover || coverPlaceHolder,
       }}
-      containerStyle={GlobalStyles.bookCover}
-      placeholderStyle={GlobalStyles.bookCover}
+      containerStyle={appearance == 'small' ? GlobalStyles.bookCoverSmall : GlobalStyles.bookCoverLarge}
+      placeholderStyle={appearance == 'small' ? GlobalStyles.bookCoverSmall : GlobalStyles.bookCoverLarge}
       PlaceholderContent={<Spinner status='primary' />}
     />
     <ProgressBar
-      width={null}
+      width={appearance == 'small' ? 173 : 260}
       animated={false}
       progress={book.progress / book.pages}
       color={Color.primary}
@@ -26,8 +26,8 @@ const BookItem = ({ book }) => (
       borderWidth={0}
       style={styles.progress}
     />
-    <Text style={styles.label} category='s1'>{book.title}</Text>
-    <Text style={styles.label} category='p2'>{book.author}</Text>
+    <Text style={styles.label} category={appearance == 'small' ? 's1' : 'h4'}>{book.title}</Text>
+    <Text style={styles.label} category={appearance == 'small' ? 'p2' : 'p1'}>{book.author}</Text>
   </View>
 );
 
@@ -35,10 +35,11 @@ const BookItem = ({ book }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 8
+    padding: 8,
+    alignItems: "center",
   },
   label: {
-    width: 260 / 1.5
+    textAlign: "center",
   },
   progress: {
     marginTop: 4,
