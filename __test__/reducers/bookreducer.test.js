@@ -12,9 +12,8 @@ const mockBook = {
 }
 
 const mockBooks = {
-    books: [
-        mockBook
-    ]
+    books: { "0": mockBook }
+
 }
 describe('bookReducer', () => {
     it('should return initial state', () => {
@@ -36,13 +35,14 @@ describe('bookReducer', () => {
             type: UPDATE_BOOK_CATEGORY,
             payload: { ...mockBook, category: WANT_TO_READ },
         })).toEqual({
-            books: [
-                {
+            books: {
+                "0": {
                     ...mockBook,
                     progress: 0,
                     category: WANT_TO_READ,
                 }
-            ],
+            }
+            ,
         });
     });
 
@@ -51,12 +51,12 @@ describe('bookReducer', () => {
             type: UPDATE_BOOK_CATEGORY,
             payload: { ...mockBook, category: READING },
         })).toEqual({
-            books: [
-                {
+            books: {
+                "0": {
                     ...mockBook,
                     category: READING,
                 }
-            ],
+            },
         });
     });
 
@@ -65,13 +65,13 @@ describe('bookReducer', () => {
             type: UPDATE_BOOK_CATEGORY,
             payload: { ...mockBook, category: COMPLETED },
         })).toEqual({
-            books: [
-                {
+            books: {
+                "0": {
                     ...mockBook,
                     progress: 15,
                     category: COMPLETED,
                 }
-            ],
+            },
         });
     });
 
@@ -81,13 +81,13 @@ describe('bookReducer', () => {
             type: UPDATE_BOOK_PROGRESS,
             payload: { ...mockBook, progress: 0 },
         })).toEqual({
-            books: [
-                {
+            books: {
+                "0": {
                     ...mockBook,
                     progress: 0,
                     category: WANT_TO_READ,
                 }
-            ],
+            },
         });
     });
     it('should handle UPDATE_BOOK_PROGRESS positive, no change to category', () => {
@@ -95,13 +95,13 @@ describe('bookReducer', () => {
             type: UPDATE_BOOK_PROGRESS,
             payload: { ...mockBook, progress: 6 },
         })).toEqual({
-            books: [
-                {
+            books: {
+                "0": {
                     ...mockBook,
                     progress: 6,
                     category: READING,
                 }
-            ],
+            },
         });
     });
     it('should handle UPDATE_BOOK_PROGRESS negative, makes progress 0, makes state WANT_TO_READ', () => {
@@ -109,13 +109,13 @@ describe('bookReducer', () => {
             type: UPDATE_BOOK_PROGRESS,
             payload: { ...mockBook, progress: -6 },
         })).toEqual({
-            books: [
-                {
+            books: {
+                "0": {
                     ...mockBook,
                     progress: 0,
                     category: WANT_TO_READ,
                 }
-            ],
+            },
         });
     });
 
@@ -124,13 +124,13 @@ describe('bookReducer', () => {
             type: UPDATE_BOOK_PROGRESS,
             payload: { ...mockBook, progress: 16 },
         })).toEqual({
-            books: [
-                {
+            books: {
+                "0": {
                     ...mockBook,
                     progress: 15,
                     category: COMPLETED,
                 }
-            ],
+            },
         });
     });
 });
