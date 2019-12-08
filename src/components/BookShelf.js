@@ -21,6 +21,8 @@ export default class BookShelf extends Component {
                 keyExtractor={this.keyExtractor}
                 renderItem={this.renderItem}
                 contentContainerStyle={styles.container}
+                onRefresh={this.props.onRefresh}
+                refreshing={false}
             />
         )
     }

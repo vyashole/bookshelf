@@ -26,6 +26,7 @@ class Home extends Component {
         <BookShelf
           books={this.props.books}
           bookPressHandler={this.bookPressHandler}
+          onRefresh={() => this.props.fetchBooks(this.props.books)}
         />
       </SafeAreaView>
     );
