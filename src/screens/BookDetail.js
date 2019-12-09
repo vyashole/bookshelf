@@ -19,7 +19,7 @@ class BookDetail extends Component {
   render() {
     const { params } = this.props.navigation.state;
     const { id } = params.book;
-    book = this.props.books.find((book) => book.id === id);
+    book = this.props.books[id];
     return (
       <SafeAreaView forceInset={{ top: 'always' }} style={styles.container}>
         <BookDetailHeader onBackPress={() => this.props.navigation.goBack()} />

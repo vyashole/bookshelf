@@ -1,5 +1,5 @@
 import {
-  SAMPLE_BOOKS, WANT_TO_READ, READING, COMPLETED,
+  SAMPLE_BOOKS, WANT_TO_READ, READING, COMPLETED, SAMPLE_BOOKS2,
 } from '../static/books';
 import {
   FETCH_BOOKS,
@@ -24,10 +24,7 @@ const bookReducer = (state = INITIAL_STATE, action) => {
       };
 
     case UPDATE_BOOKS:
-      updatedBooks = books.map((book) => {
-        if (book.id === payload.id) return { ...book, ...payload };
-        return book;
-      });
+      updatedBooks = { ...books, [payload.id]: payload }
       return {
         ...state,
         books: updatedBooks,
@@ -36,13 +33,9 @@ const bookReducer = (state = INITIAL_STATE, action) => {
     case UPDATE_BOOK_CATEGORY:
       if (payload.category === WANT_TO_READ) payload.progress = 0;
       else if (payload.category === COMPLETED) payload.progress = payload.pages;
-      updatedBooks = books.map((book) => {
-        if (book.id === payload.id) return { ...book, ...payload };
-        return book;
-      });
       return {
         ...state,
-        books: updatedBooks,
+        books: { ...books, [payload.id]: payload },
       };
 
     case UPDATE_BOOK_PROGRESS:
@@ -57,13 +50,9 @@ const bookReducer = (state = INITIAL_STATE, action) => {
       else {
         payload.category = READING;
       }
-      updatedBooks = books.map((book) => {
-        if (book.id === payload.id) return { ...book, ...payload };
-        return book;
-      });
       return {
         ...state,
-        books: updatedBooks,
+        books: { ...books, [payload.id]: payload },
       };
 
     case ADD_BOOKS:

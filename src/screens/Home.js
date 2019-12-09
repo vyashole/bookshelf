@@ -24,7 +24,7 @@ class Home extends Component {
       <SafeAreaView forceInset={{ top: 'always' }} style={styles.container}>
         <HomeHeader />
         <BookShelf
-          books={this.props.books}
+          books={Object.values(this.props.books)}
           bookPressHandler={this.bookPressHandler}
           onRefresh={() => this.props.fetchBooks(this.props.books)}
         />
