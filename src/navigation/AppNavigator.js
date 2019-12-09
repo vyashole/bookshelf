@@ -2,6 +2,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import Home from '../screens/Home';
 import BookDetail from '../screens/BookDetail';
+import BookSearch from '../screens/BookSearch';
 
 export default AppNavigator = createStackNavigator({
   Home: {
@@ -15,6 +16,9 @@ export default AppNavigator = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       title: navigation.getParam('book', { title: null }).title || 'Book Detail',
     }),
+  },
+  Search: {
+    screen: BookSearch,
   },
 
 }, {

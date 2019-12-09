@@ -22,9 +22,9 @@ class Home extends Component {
   render() {
     return (
       <SafeAreaView forceInset={{ top: 'always' }} style={styles.container}>
-        <HomeHeader />
+        <HomeHeader onSearchPress={() => this.props.navigation.navigate('Search')} />
         <BookShelf
-          books={Object.values(this.props.books)}
+          books={Object.values(this.props.books).sort((a, b) => a.author.localeCompare(b.author))}
           bookPressHandler={this.bookPressHandler}
           onRefresh={() => this.props.fetchBooks(this.props.books)}
         />

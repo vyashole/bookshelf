@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StyleSheet, FlatList } from 'react-native'
 import BookItem from './BookItem';
+import { Text } from '@ui-kitten/components';
 
 
 export default class BookShelf extends Component {
@@ -23,6 +24,7 @@ export default class BookShelf extends Component {
                 contentContainerStyle={styles.container}
                 onRefresh={this.props.onRefresh}
                 refreshing={false}
+                ListEmptyComponent={<Text style={{ textAlign: "center", padding: 20 }} category='p1'>No books found!</Text>}
             />
         )
     }

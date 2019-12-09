@@ -26,9 +26,9 @@ const BookAction = (props) => (
         icon={BookIcon} />
 );
 
-export const HomeHeader = () => {
+export const HomeHeader = ({ onSearchPress }) => {
     const renderRightControls = () => [
-        <SearchAction />,
+        <SearchAction onPress={onSearchPress} />,
     ];
 
     return (
